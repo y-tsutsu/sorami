@@ -13,7 +13,9 @@ target_compile_features(sorami PRIVATE cxx_std_20)
 set_property(TARGET sorami PROPERTY CXX_STANDARD_REQUIRED ON)
 set_property(TARGET sorami PROPERTY CXX_EXTENSIONS OFF)
 
-target_include_directories(sorami PRIVATE ${PROJECT_SOURCE_DIR}/src)
+target_include_directories(sorami PRIVATE ${PROJECT_SOURCE_DIR}/src ${PROJECT_SOURCE_DIR}/third_party)
+
+file(COPY config DESTINATION ${CMAKE_BINARY_DIR})
 
 if(MSVC)
     target_compile_options(sorami PRIVATE /W4 /permissive-)

@@ -1,0 +1,90 @@
+[
+    {
+        "name": "東海",
+        "number": 1,
+        "areas": [
+            {
+                "name": "静岡県",
+                "number": 1,
+                "code": "220000"
+            },
+            {
+                "name": "愛知県",
+                "number": 2,
+                "code": "230000"
+            },
+            {
+                "name": "岐阜県",
+                "number": 3,
+                "code": "210000"
+            },
+            {
+                "name": "三重県",
+                "number": 4,
+                "code": "240000"
+            }
+        ]
+    },
+    {
+        "name": "近畿",
+        "number": 2,
+        "areas": [
+            {
+                "name": "滋賀県",
+                "number": 1,
+                "code": "250000"
+            },
+            {
+                "name": "京都府",
+                "number": 2,
+                "code": "260000"
+            },
+            {
+                "name": "大阪府",
+                "number": 3,
+                "code": "270000"
+            },
+            {
+                "name": "兵庫県",
+                "number": 4,
+                "code": "280000"
+            },
+            {
+                "name": "奈良県",
+                "number": 5,
+                "code": "290000"
+            },
+            {
+                "name": "和歌山県",
+                "number": 6,
+                "code": "300000"
+            }
+        ]
+    },
+    {
+        "name": "中国",
+        "number": 3,
+        "areas": [
+            {
+                "name": "岡山県",
+                "number": 1,
+                "code": "330000"
+            },
+            {
+                "name": "広島県",
+                "number": 2,
+                "code": "340000"
+            },
+            {
+                "name": "島根県",
+                "number": 3,
+                "code": "320000"
+            },
+            {
+                "name": "鳥取県",
+                "number": 4,
+                "code": "310000"
+            }
+        ]
+    }
+]
