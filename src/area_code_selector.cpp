@@ -1,4 +1,4 @@
-#include "input_console.h"
+#include "area_code_selector.h"
 
 #include <iostream>
 #include <string>
@@ -9,7 +9,7 @@ using std::endl;
 
 namespace Console
 {
-    InputConsole::InputConsole(json config) : config_(config)
+    AreaCodeSelector::AreaCodeSelector(json config) : config_(config)
     {
         for (auto &element : config_)
         {
@@ -18,11 +18,56 @@ namespace Console
         }
     }
 
-    InputConsole::~InputConsole()
+    AreaCodeSelector::~AreaCodeSelector()
     {
     }
 
-    void InputConsole::PrintAreaSelectMessage()
+    string AreaCodeSelector::SelectAreaCode()
+    {
+        PrintAreaSelectMessage();
+
+        int select_num;
+        cin >> select_num;
+
+        if (IsQuitNumber(select_num))
+        {
+            return string(QUIT_CODE);
+        }
+
+        if (IsInvalidAreaNumber(select_num))
+        {
+            cout << "[Error]: Invalid Area Number..." << endl;
+            cout << endl;
+            return string(INVALID_CODE);
+        }
+
+        PrintSubAreaSelectMessage(select_num);
+
+        int select_sub_num;
+        cin >> select_sub_num;
+
+        if (IsInvalidSubAreaNumber(select_sub_num))
+        {
+            cout << "[Error]: Invalid Sub Area Number..." << endl;
+            cout << endl;
+            return string(INVALID_CODE);
+        }
+
+        string code = GetSubAreaCode(select_sub_num);
+        return code;
+    }
+
+    bool AreaCodeSelector::IsQuitCode(string_view code)
+    {
+        return code == QUIT_CODE;
+    }
+
+    bool AreaCodeSelector::IsInvalidCode(string_view code)
+    {
+        return code == INVALID_CODE;
+    }
+
+    void AreaCodeSelector::PrintAreaSelectMessage()
     {
         cout << "input area number." << endl;
         cout << endl;
@@ -38,10 +83,10 @@ namespace Console
         cout << endl;
     }
 
-    void InputConsole::PrintSubAreaSelectMessage(int area_num)
+    void AreaCodeSelector::PrintSubAreaSelectMessage(int area_num)
     {
         cout << endl;
-        area_infos_ = GetAreaInfos(area_num, config_);
+        area_infos_ = GetAreaInfos(area_num);
         for (auto &&info : area_infos_)
         {
             cout << info.number << ": " << info.name << endl;
@@ -49,27 +94,27 @@ namespace Console
         cout << endl;
     }
 
-    string InputConsole::GetSubAreaCode(int area_num)
+    string AreaCodeSelector::GetSubAreaCode(int sub_area_num)
     {
         for (auto &&info : area_infos_)
         {
-            if (info.number == area_num)
+            if (info.number == sub_area_num)
                 return info.code;
         }
         return "";
     }
 
-    bool InputConsole::IsQuitNumber(int area_num)
+    bool AreaCodeSelector::IsQuitNumber(int area_num)
     {
         return area_num == QUIT_NUM;
     }
 
-    bool InputConsole::IsInvalidAreaNumber(int area_num)
+    bool AreaCodeSelector::IsInvalidAreaNumber(int area_num)
     {
         return !area_nums_.contains(area_num);
     }
 
-    bool InputConsole::IsInvalidSubAreaNumber(int sub_area_num)
+    bool AreaCodeSelector::IsInvalidSubAreaNumber(int sub_area_num)
     {
         for (auto &&info : area_infos_)
         {
@@ -79,10 +124,10 @@ namespace Console
         return true;
     }
 
-    vector<InputConsole::AreaInfo> InputConsole::GetAreaInfos(int number, json config)
+    vector<AreaCodeSelector::AreaInfo> AreaCodeSelector::GetAreaInfos(int number)
     {
         vector<AreaInfo> ret;
-        for (auto &element : config)
+        for (auto &element : config_)
         {
             auto num = element["number"].template get<int>();
             if (num != number)

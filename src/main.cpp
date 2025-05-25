@@ -7,7 +7,7 @@
 
 #include <nlohmann/json.hpp>
 
-#include "input_console.h"
+#include "area_code_selector.h"
 
 using std::cin;
 using std::cout;
@@ -19,7 +19,7 @@ using std::vector;
 
 using json = nlohmann::json;
 
-using Console::InputConsole;
+using Console::AreaCodeSelector;
 
 json read_configfile(string filename)
 {
@@ -31,37 +31,22 @@ json read_configfile(string filename)
 int main(int argc, char const *argv[])
 {
     auto config = read_configfile("./config/area_config.json");
-    auto console = InputConsole(config);
+    auto console = AreaCodeSelector(config);
 
     while (true)
     {
-        console.PrintAreaSelectMessage();
+        string code = console.SelectAreaCode();
 
-        int select_num;
-        cin >> select_num;
-
-        if (console.IsQuitNumber(select_num))
+        if (console.IsQuitCode(code))
+        {
             break;
-        if (console.IsInvalidAreaNumber(select_num))
+        }
+
+        if (console.IsInvalidCode(code))
         {
-            cout << "[Error]: Invalid Area Number..." << endl;
-            cout << endl;
             continue;
         }
 
-        console.PrintSubAreaSelectMessage(select_num);
-
-        int select_sub_num;
-        cin >> select_sub_num;
-
-        if (console.IsInvalidSubAreaNumber(select_sub_num))
-        {
-            cout << "[Error]: Invalid Sub Area Number..." << endl;
-            cout << endl;
-            continue;
-        }
-
-        string code = console.GetSubAreaCode(select_sub_num);
         cout << code << " !!!!!" << endl;
         cout << endl;
     }
