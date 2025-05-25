@@ -9,7 +9,7 @@ using std::endl;
 
 namespace Console
 {
-    AreaCodeSelector::AreaCodeSelector(json config) : config_(config)
+    AreaCodeSelector::AreaCodeSelector(const json &config) : config_(config)
     {
         for (auto &element : config_)
         {

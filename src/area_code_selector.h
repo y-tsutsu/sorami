@@ -26,7 +26,7 @@ namespace Console
         };
 
     private:
-        json config_;
+        const json &config_;
         set<int> area_nums_;
         vector<AreaInfo> area_infos_;
         static constexpr int QUIT_NUM = 0;
@@ -34,7 +34,7 @@ namespace Console
         static constexpr string_view INVALID_CODE = "INVALID_CODE";
 
     public:
-        AreaCodeSelector(json config);
+        AreaCodeSelector(const json &config);
         ~AreaCodeSelector();
 
     public:
