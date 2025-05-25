@@ -1,7 +1,58 @@
 [
     {
-        "name": "東海",
+        "name": "関東甲信",
         "number": 1,
+        "areas": [
+            {
+                "name": "茨城県",
+                "number": 1,
+                "code": "080000"
+            },
+            {
+                "name": "栃木県",
+                "number": 2,
+                "code": "090000"
+            },
+            {
+                "name": "群馬県",
+                "number": 3,
+                "code": "100000"
+            },
+            {
+                "name": "埼玉県",
+                "number": 4,
+                "code": "110000"
+            },
+            {
+                "name": "東京都",
+                "number": 5,
+                "code": "130000"
+            },
+            {
+                "name": "千葉県",
+                "number": 6,
+                "code": "120000"
+            },
+            {
+                "name": "神奈川県",
+                "number": 7,
+                "code": "140000"
+            },
+            {
+                "name": "長野県",
+                "number": 8,
+                "code": "200000"
+            },
+            {
+                "name": "山梨県",
+                "number": 9,
+                "code": "190000"
+            }
+        ]
+    },
+    {
+        "name": "東海",
+        "number": 2,
         "areas": [
             {
                 "name": "静岡県",
@@ -27,7 +78,7 @@
     },
     {
         "name": "近畿",
-        "number": 2,
+        "number": 3,
         "areas": [
             {
                 "name": "滋賀県",
@@ -63,7 +114,7 @@
     },
     {
         "name": "中国",
-        "number": 3,
+        "number": 4,
         "areas": [
             {
                 "name": "岡山県",
@@ -84,6 +135,32 @@
                 "name": "鳥取県",
                 "number": 4,
                 "code": "310000"
+            }
+        ]
+    },
+    {
+        "name": "四国",
+        "number": 5,
+        "areas": [
+            {
+                "name": "徳島県",
+                "number": 1,
+                "code": "360000"
+            },
+            {
+                "name": "香川県",
+                "number": 2,
+                "code": "370000"
+            },
+            {
+                "name": "愛媛県",
+                "number": 3,
+                "code": "380000"
+            },
+            {
+                "name": "高知県",
+                "number": 4,
+                "code": "390000"
             }
         ]
     }
