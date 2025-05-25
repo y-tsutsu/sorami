@@ -1,10 +1,12 @@
 #pragma once
 
+#include <optional>
 #include <string>
 #include <string_view>
 
 #include <nlohmann/json.hpp>
 
+using std::optional;
 using std::string;
 using std::string_view;
 
@@ -22,7 +24,7 @@ namespace Json
         ~WeatherJsonDownloader();
 
     public:
-        json Download(string area_code);
+        optional<json> Download(string area_code);
 
     private:
         bool CreateDownloadDirectory();

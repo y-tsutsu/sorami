@@ -10,6 +10,7 @@
 using std::cerr;
 using std::endl;
 using std::ifstream;
+using std::nullopt;
 using std::ofstream;
 
 namespace chrono = std::chrono;
@@ -27,17 +28,20 @@ namespace Json
         curl_global_cleanup();
     }
 
-    json WeatherJsonDownloader::Download(string area_code)
+    optional<json> WeatherJsonDownloader::Download(string area_code)
     {
         if (!CreateDownloadDirectory())
         {
-            return json();
+            return nullopt;
         }
 
         string filepath = GetJsonFilepath(area_code);
         if (!ExistsTodayFileAndCleanup(filepath))
         {
-            DownloadByCurl(area_code, filepath);
+            if (!DownloadByCurl(area_code, filepath))
+            {
+                return nullopt;
+            }
         }
 
         ifstream f(filepath.c_str());

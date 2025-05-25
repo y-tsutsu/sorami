@@ -1,25 +1,15 @@
 #include <fstream>
-#include <iostream>
-#include <map>
 #include <memory>
 #include <string>
-#include <utility>
-#include <vector>
 
 #include <nlohmann/json.hpp>
 
 #include "area_code_selector.h"
 #include "weather_json_downloader.h"
 
-using std::cin;
-using std::cout;
-using std::endl;
 using std::ifstream;
 using std::make_unique;
-using std::map;
-using std::pair;
 using std::string;
-using std::vector;
 
 using json = nlohmann::json;
 
@@ -53,7 +43,11 @@ int main(int argc, char const *argv[])
             continue;
         }
 
-        json json = downloader->Download(code);
+        auto json = downloader->Download(code);
+        if (!json.has_value())
+        {
+            continue;
+        }
     }
 
     return 0;
