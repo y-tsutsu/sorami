@@ -6,6 +6,7 @@
 
 #include "area_code_selector.h"
 #include "weather_json_downloader.h"
+#include "weather_viewer.h"
 
 using std::ifstream;
 using std::make_unique;
@@ -14,6 +15,7 @@ using std::string;
 using json = nlohmann::json;
 
 using Console::AreaCodeSelector;
+using Console::WeatherViewer;
 using Json::WeatherJsonDownloader;
 
 json read_configfile(string filename)
@@ -28,6 +30,7 @@ int main(int argc, char const *argv[])
     auto config = read_configfile("./config/area_config.json");
     auto selector = make_unique<AreaCodeSelector>(config);
     auto downloader = make_unique<WeatherJsonDownloader>();
+    auto viewer = make_unique<WeatherViewer>();
 
     while (true)
     {
@@ -48,6 +51,8 @@ int main(int argc, char const *argv[])
         {
             continue;
         }
+
+        viewer->Display(info, json);
     }
 
     return 0;

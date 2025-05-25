@@ -116,7 +116,7 @@ namespace Console
     vector<AreaCodeSelector::AreaInfo> AreaCodeSelector::GetAreaInfos(int area_num)
     {
         vector<AreaInfo> ret;
-        for (auto &element : config_)
+        for (auto &&element : config_)
         {
             auto num = element["number"].template get<int>();
             if (num != area_num)
