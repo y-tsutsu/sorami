@@ -17,12 +17,16 @@ namespace Console
 {
     class AreaCodeSelector
     {
-    private:
+    public:
         struct AreaInfo
         {
             string name;
             int number;
             string code;
+            bool IsQuitCode() { return code == QUIT_CODE; }
+            bool IsInvalidCode() { return code == INVALID_CODE; }
+            static AreaInfo NewQuitAreaInfo() { return {"", 0, string(QUIT_CODE)}; }
+            static AreaInfo NewInvalidAreaInfo() { return {"", 0, string(INVALID_CODE)}; }
         };
 
     private:
@@ -38,17 +42,15 @@ namespace Console
         ~AreaCodeSelector();
 
     public:
-        string SelectAreaCode();
-        bool IsQuitCode(string_view code);
-        bool IsInvalidCode(string_view code);
+        AreaInfo SelectAreaCode();
 
     private:
         void PrintAreaSelectMessage();
         void PrintSubAreaSelectMessage(int area_num);
-        string GetSubAreaCode(int sub_area_num);
+        AreaInfo GetAreaInfo(int sub_area_num);
         bool IsQuitNumber(int area_num);
         bool IsInvalidAreaNumber(int area_num);
         bool IsInvalidSubAreaNumber(int sub_area_num);
-        vector<AreaInfo> GetAreaInfos(int number);
+        vector<AreaInfo> GetAreaInfos(int area_num);
     };
 }

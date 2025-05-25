@@ -22,7 +22,7 @@ namespace Console
     {
     }
 
-    string AreaCodeSelector::SelectAreaCode()
+    AreaCodeSelector::AreaInfo AreaCodeSelector::SelectAreaCode()
     {
         PrintAreaSelectMessage();
 
@@ -31,14 +31,14 @@ namespace Console
 
         if (IsQuitNumber(select_num))
         {
-            return string(QUIT_CODE);
+            return AreaInfo::NewQuitAreaInfo();
         }
 
         if (IsInvalidAreaNumber(select_num))
         {
             cout << "[Error]: Invalid Area Number..." << endl;
             cout << endl;
-            return string(INVALID_CODE);
+            return AreaInfo::NewInvalidAreaInfo();
         }
 
         PrintSubAreaSelectMessage(select_num);
@@ -50,21 +50,10 @@ namespace Console
         {
             cout << "[Error]: Invalid Sub Area Number..." << endl;
             cout << endl;
-            return string(INVALID_CODE);
+            return AreaInfo::NewInvalidAreaInfo();
         }
 
-        string code = GetSubAreaCode(select_sub_num);
-        return code;
-    }
-
-    bool AreaCodeSelector::IsQuitCode(string_view code)
-    {
-        return code == QUIT_CODE;
-    }
-
-    bool AreaCodeSelector::IsInvalidCode(string_view code)
-    {
-        return code == INVALID_CODE;
+        return GetAreaInfo(select_sub_num);
     }
 
     void AreaCodeSelector::PrintAreaSelectMessage()
@@ -94,14 +83,14 @@ namespace Console
         cout << endl;
     }
 
-    string AreaCodeSelector::GetSubAreaCode(int sub_area_num)
+    AreaCodeSelector::AreaInfo AreaCodeSelector::GetAreaInfo(int sub_area_num)
     {
         for (auto &&info : area_infos_)
         {
             if (info.number == sub_area_num)
-                return info.code;
+                return info;
         }
-        return "";
+        return AreaInfo();
     }
 
     bool AreaCodeSelector::IsQuitNumber(int area_num)
@@ -124,13 +113,13 @@ namespace Console
         return true;
     }
 
-    vector<AreaCodeSelector::AreaInfo> AreaCodeSelector::GetAreaInfos(int number)
+    vector<AreaCodeSelector::AreaInfo> AreaCodeSelector::GetAreaInfos(int area_num)
     {
         vector<AreaInfo> ret;
         for (auto &element : config_)
         {
             auto num = element["number"].template get<int>();
-            if (num != number)
+            if (num != area_num)
                 continue;
             for (auto &ele : element["areas"])
             {

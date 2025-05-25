@@ -31,19 +31,19 @@ int main(int argc, char const *argv[])
 
     while (true)
     {
-        string code = selector->SelectAreaCode();
+        auto info = selector->SelectAreaCode();
 
-        if (selector->IsQuitCode(code))
+        if (info.IsQuitCode())
         {
             break;
         }
 
-        if (selector->IsInvalidCode(code))
+        if (info.IsInvalidCode())
         {
             continue;
         }
 
-        auto json = downloader->Download(code);
+        auto json = downloader->Download(info.code);
         if (!json.has_value())
         {
             continue;
