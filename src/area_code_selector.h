@@ -43,7 +43,7 @@ namespace Console
         ~AreaCodeSelector();
 
     public:
-        AreaInfo SelectAreaCode();
+        AreaInfo SelectAreaInfo();
 
     private:
         void PrintAreaSelectMessage();

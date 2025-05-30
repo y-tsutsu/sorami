@@ -13,7 +13,7 @@ namespace Console
     {
         for (auto &element : config_)
         {
-            auto number = element["number"].template get<int>();
+            auto number = element["number"].get<int>();
             area_nums_.insert(number);
         }
     }
@@ -22,7 +22,7 @@ namespace Console
     {
     }
 
-    AreaCodeSelector::AreaInfo AreaCodeSelector::SelectAreaCode()
+    AreaCodeSelector::AreaInfo AreaCodeSelector::SelectAreaInfo()
     {
         PrintAreaSelectMessage();
 
@@ -63,8 +63,8 @@ namespace Console
 
         for (auto &element : config_)
         {
-            auto name = element["name"].template get<string>();
-            auto number = element["number"].template get<int>();
+            auto name = element["name"].get<string>();
+            auto number = element["number"].get<int>();
             cout << number << ": " << name << endl;
         }
 
@@ -118,14 +118,14 @@ namespace Console
         vector<AreaInfo> ret;
         for (auto &&element : config_)
         {
-            auto num = element["number"].template get<int>();
+            auto num = element["number"].get<int>();
             if (num != area_num)
                 continue;
             for (auto &ele : element["areas"])
             {
-                ret.emplace_back(ele["name"].template get<string>(),
-                                 ele["number"].template get<int>(),
-                                 ele["code"].template get<string>());
+                ret.emplace_back(ele["name"].get<string>(),
+                                 ele["number"].get<int>(),
+                                 ele["code"].get<string>());
             }
             break;
         }

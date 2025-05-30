@@ -34,7 +34,7 @@ int main(int argc, char const *argv[])
 
     while (true)
     {
-        auto info = selector->SelectAreaCode();
+        auto info = selector->SelectAreaInfo();
 
         if (info.IsQuitCode())
         {
@@ -52,7 +52,7 @@ int main(int argc, char const *argv[])
             continue;
         }
 
-        viewer->Display(info, json);
+        viewer->Display(info, json.value());
     }
 
     return 0;

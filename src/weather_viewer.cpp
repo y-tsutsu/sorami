@@ -27,7 +27,7 @@ namespace Console
         {
             for (auto &&ele : element["timeSeries"])
             {
-                if (ele["timeDefines"].size() == 3)
+                if (ele["timeDefines"].size() <= 3)
                 {
                     DisplayContens(ele);
                 }
